@@ -1,12 +1,10 @@
 Vagrant::Config.run do |config|
-  config.vm.box = ''
-  config.vm.box_url = ''
+  config.vm.box = 'CentOS-6.2-x86_64-minimal'
+  config.vm.box_url = 'iso/CentOS-6.2-x86_64-minimal.box'
   # config.vm.boot_mode = :gui
   
   # Cloud Stack Management Server
   config.vm.define :cloudstackms do |cloudstackms|  
-    cloudstackms.vm.box = ''
-    cloudstackms.vm.box_url = ''
     cloudstackms.vm.host_name = 'cloudstackms'
     # Guest Network
     cloudstackms.vm.network :hostonly, "10.10.2.2" 
@@ -22,7 +20,7 @@ Vagrant::Config.run do |config|
     #   "--memory", "2048"
     # ]
     cloudstackms.vm.provision :puppet do |puppet|
-      puppet.module_path = ['puppet-modules/puppet-module-cloudstack']
+      puppet.module_path = ['../puppet-modules/puppet-module-cloudstack']
       puppet.manifest_file = 'site.pp'
       puppet.options = ["--templatedir templates"]
     end
@@ -45,7 +43,7 @@ Vagrant::Config.run do |config|
     #   "--memory", "1024"
     # ]
     cloudstackhv.vm.provision :puppet do |puppet|
-      puppet.module_path = ['puppet-modules/puppet-module-cloudstack']
+      puppet.module_path = ['../puppet-modules/puppet-module-cloudstack']
       puppet.manifest_file = 'site.pp'    
       puppet.options = ["--templatedir templates"]
     end
