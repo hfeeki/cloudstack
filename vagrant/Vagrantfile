@@ -1,0 +1,44 @@
+Vagrant::Config.run do |config|
+  # config.vm.boot_mode = :gui
+ 
+  # Cloud Stack Management Server
+  config.vm.define :cloudstackms do |devstack|  
+    devstack.vm.box = 'ubuntu-1110-server-amd64'
+    devstack.vm.box_url = 'http://timhuegdon.com/vagrant-boxes/ubuntu-11.10.box'
+    devstack.vm.host_name = 'devstack'
+    devstack.vm.network :hostonly, "10.10.10.4"
+    devstack.vm.network :hostonly, "192.168.3.4"
+    devstack.vm.customize [
+      "modifyvm", :id,
+      "--name", "novaservices",
+      "--memory", "2048"
+    ]
+    devstack.vm.provision :puppet do |puppet|
+      puppet.module_path = ['puppet/modules']
+      puppet.manifest_file = 'site.pp'
+      # puppet.options = ["--debug", "--templatedir templates"]
+      puppet.options = ["--templatedir templates"]
+    end
+  end
+
+  # Cloud Stack Hypervisor
+  config.vm.define :cloudstackhv do |novaservices|  
+    novaservices.vm.box = 'ubuntu-1110-server-amd64'
+    novaservices.vm.box_url = 'http://timhuegdon.com/vagrant-boxes/ubuntu-11.10.box'
+    novaservices.vm.host_name = 'novaservices'
+    novaservices.vm.network :hostonly, "10.10.11.2"
+    novaservices.vm.network :hostonly, "192.168.11.2"
+    # novaservices.vm.customize [
+    #   "modifyvm", :id,
+    #   "--name", "novaservices",
+    #   "--memory", "1024"
+    # ]
+    novaservices.vm.provision :puppet do |puppet|
+      puppet.module_path = ['puppet/modules']
+      puppet.manifest_file = 'site.pp'
+      # puppet.options = ["--debug", "--templatedir templates"]
+      puppet.options = ["--templatedir templates"]
+    end
+  end
+  
+end
