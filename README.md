@@ -1,14 +1,14 @@
-cloudstack
-==========
+# cloudstack
 
-CloudStack vagrant instalation
+## CloudStack vagrant instalation
 
-clone repository
 
-vagrant basebox using a veewee template
+Clone repository
 
-$ gem install vagrant veewee
-$ cd vagrant
-$ vagrant basebox define 'CentOS-6.2-x86_64-minimal' 'CentOS-6.2-x86_64-minimal'
-$ vagrant basebox build 'CentOS-6.2-x86_64-minimal'
+        gem install vagrant veewee
+        cd vagrant
+        
+vagrant basebox using a veewee template        
+        vagrant basebox define 'CentOS-6.2-x86_64-minimal' 'CentOS-6.2-x86_64-minimal'
+        vagrant basebox build 'CentOS-6.2-x86_64-minimal'
 
