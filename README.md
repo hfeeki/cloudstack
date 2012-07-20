@@ -1,0 +1,4 @@
+cloudstack
+==========
+
+CloudStack vagrant instalation
