@@ -5,11 +5,11 @@ node basenode {
 }
 
 node cloudstackms.example.com inherits basenode {
-  include cloudstack::managementserver
+  include cloudstack::management
   # Install all management server resources in a single node
 }
 
 node cloudstackhv.example.com inherits basenode {
-  include cloudstack::hypervisor::kvm
+  include cloudstack::hypervisor
   # Install KVM hypervisor
 }
